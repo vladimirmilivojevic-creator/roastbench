@@ -1,0 +1,15 @@
+{
+  "name": "roastbench-e2e",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "playwright test --project=chromium",
+    "screenshots": "playwright test --project=screenshots",
+    "browsers": "playwright install chromium"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.65.0",
+    "@types/node": "^26.6.6"
+  }
+}
