@@ -35,3 +35,58 @@ jobs:
           name: backend-coverage
           path: backend/target/site/jacoco
           if-no-files-found: ignore
+
+  frontend:
+    name: Frontend (lint, types, tests, build)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci --no-audit --no-fund
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+
+  e2e:
+    name: End-to-end (docker compose + Playwright)
+    runs-on: ubuntu-latest
+    needs: [backend, frontend]
+    steps:
+      - uses: actions/checkout@v4
+      # This is also the proof that the README promise holds: one command starts database, API and web app.
+      - name: Start the whole app with docker compose
+        run: docker compose up -d --build --wait --wait-timeout 420
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: e2e/package-lock.json
+      - name: Install Playwright
+        working-directory: e2e
+        run: |
+          npm ci --no-audit --no-fund
+          npx playwright install --with-deps chromium
+      - name: Run the browser tests
+        working-directory: e2e
+        run: npm test
+      - name: Upload the Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: e2e/playwright-report
+          if-no-files-found: ignore
+      - name: Show container logs
+        if: failure()
+        run: docker compose logs --no-color --tail=200
+      - name: Stop the app
+        if: always()
+        run: docker compose down -v
