@@ -1,0 +1,9 @@
+roastbench:
+  admin-token: test-admin-token
+  demo:
+    seed-on-startup: false
+
+logging:
+  level:
+    root: warn
+    dev.roastbench: info

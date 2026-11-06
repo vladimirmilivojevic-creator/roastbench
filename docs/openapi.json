@@ -1,0 +1,2167 @@
+{
+  "components" : {
+    "schemas" : {
+      "AdjustmentRequest" : {
+        "properties" : {
+          "deltaKg" : {
+            "maximum" : 1000000,
+            "minimum" : -1000000,
+            "type" : "number"
+          },
+          "locationId" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "occurredAt" : {
+            "format" : "date-time",
+            "type" : "string"
+          },
+          "reason" : {
+            "maxLength" : 300,
+            "minLength" : 0,
+            "type" : "string"
+          }
+        },
+        "required" : [ "deltaKg", "locationId", "reason" ],
+        "type" : "object"
+      },
+      "AlertDto" : {
+        "properties" : {
+          "code" : {
+            "type" : "string"
+          },
+          "country" : {
+            "type" : "string"
+          },
+          "daysOfStockLeft" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "lotId" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "minStockKg" : {
+            "type" : "number"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "severity" : {
+            "enum" : [ "OK", "LOW", "OUT" ],
+            "type" : "string"
+          },
+          "stockKg" : {
+            "type" : "number"
+          }
+        },
+        "type" : "object"
+      },
+      "AssignProfileRequest" : {
+        "properties" : {
+          "profileId" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        },
+        "type" : "object"
+      },
+      "CompareItemDto" : {
+        "properties" : {
+          "curve" : {
+            "$ref" : "#/components/schemas/CurveDto"
+          },
+          "events" : {
+            "items" : {
+              "$ref" : "#/components/schemas/EventDto"
+            },
+            "type" : "array"
+          },
+          "metrics" : {
+            "$ref" : "#/components/schemas/MetricsDto"
+          },
+          "roast" : {
+            "$ref" : "#/components/schemas/RoastSummaryDto"
+          }
+        },
+        "type" : "object"
+      },
+      "CompareResponse" : {
+        "properties" : {
+          "items" : {
+            "items" : {
+              "$ref" : "#/components/schemas/CompareItemDto"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "ComparisonDto" : {
+        "properties" : {
+          "referenceId" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "result" : {
+            "$ref" : "#/components/schemas/ComparisonResult"
+          },
+          "roastId" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "rorWindowSeconds" : {
+            "format" : "double",
+            "type" : "number"
+          }
+        },
+        "type" : "object"
+      },
+      "ComparisonResult" : {
+        "properties" : {
+          "beanTempDelta" : {
+            "items" : {
+              "format" : "double",
+              "type" : "number"
+            },
+            "type" : "array"
+          },
+          "dropBeanTempDelta" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "dropDeltaSeconds" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "dryEndDeltaSeconds" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "dtrDeltaPercentPoints" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "firstCrackDeltaSeconds" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "gridSeconds" : {
+            "items" : {
+              "format" : "double",
+              "type" : "number"
+            },
+            "type" : "array"
+          },
+          "maxAbsDeviation" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "maxDeviationAtSeconds" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "meanAbsDeviation" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "meanSignedDeviation" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "overlapSeconds" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "phases" : {
+            "items" : {
+              "$ref" : "#/components/schemas/PhaseDelta"
+            },
+            "type" : "array"
+          },
+          "rmse" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "roastLossDeltaPercentPoints" : {
+            "format" : "double",
+            "type" : "number"
+          }
+        },
+        "type" : "object"
+      },
+      "CountryStockDto" : {
+        "properties" : {
+          "country" : {
+            "type" : "string"
+          },
+          "stockKg" : {
+            "type" : "number"
+          }
+        },
+        "type" : "object"
+      },
+      "CurveDto" : {
+        "properties" : {
+          "beanTemp" : {
+            "items" : {
+              "format" : "double",
+              "type" : "number"
+            },
+            "type" : "array"
+          },
+          "envTemp" : {
+            "items" : {
+              "format" : "double",
+              "type" : "number"
+            },
+            "type" : "array"
+          },
+          "ror" : {
+            "items" : {
+              "format" : "double",
+              "type" : "number"
+            },
+            "type" : "array"
+          },
+          "rorWindowSeconds" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "timeSeconds" : {
+            "items" : {
+              "format" : "double",
+              "type" : "number"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "DashboardDto" : {
+        "properties" : {
+          "alerts" : {
+            "items" : {
+              "$ref" : "#/components/schemas/AlertDto"
+            },
+            "type" : "array"
+          },
+          "avgDtrPercentLast30Days" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "avgLossPercentLast30Days" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "inventory" : {
+            "$ref" : "#/components/schemas/SummaryDto"
+          },
+          "kgRoastedLast30Days" : {
+            "type" : "number"
+          },
+          "recentRoasts" : {
+            "items" : {
+              "$ref" : "#/components/schemas/RoastSummaryDto"
+            },
+            "type" : "array"
+          },
+          "roastsLast30Days" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "totalRoasts" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        },
+        "type" : "object"
+      },
+      "EventDto" : {
+        "properties" : {
+          "beanTemp" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "estimated" : {
+            "type" : "boolean"
+          },
+          "label" : {
+            "type" : "string"
+          },
+          "timeSeconds" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "type" : {
+            "enum" : [ "CHARGE", "TURNING_POINT", "DRY_END", "FIRST_CRACK_START", "FIRST_CRACK_END", "SECOND_CRACK_START", "SECOND_CRACK_END", "DROP", "COOL" ],
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "ImportPreviewDto" : {
+        "properties" : {
+          "beans" : {
+            "type" : "string"
+          },
+          "curve" : {
+            "$ref" : "#/components/schemas/CurveDto"
+          },
+          "events" : {
+            "items" : {
+              "$ref" : "#/components/schemas/EventDto"
+            },
+            "type" : "array"
+          },
+          "filename" : {
+            "type" : "string"
+          },
+          "format" : {
+            "enum" : [ "CSV", "ARTISAN_ALOG", "MANUAL", "DEMO" ],
+            "type" : "string"
+          },
+          "greenWeightG" : {
+            "type" : "number"
+          },
+          "machine" : {
+            "type" : "string"
+          },
+          "metrics" : {
+            "$ref" : "#/components/schemas/MetricsDto"
+          },
+          "roastedAt" : {
+            "format" : "date-time",
+            "type" : "string"
+          },
+          "roastedWeightG" : {
+            "type" : "number"
+          },
+          "title" : {
+            "type" : "string"
+          },
+          "warnings" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "ImportRequest" : {
+        "properties" : {
+          "greenWeightG" : {
+            "maximum" : 1000000,
+            "minimum" : 0.1,
+            "type" : "number"
+          },
+          "lots" : {
+            "items" : {
+              "$ref" : "#/components/schemas/LotWeight"
+            },
+            "maxItems" : 10,
+            "minItems" : 0,
+            "type" : "array"
+          },
+          "machine" : {
+            "maxLength" : 120,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "name" : {
+            "maxLength" : 150,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "notes" : {
+            "maxLength" : 4000,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "profileId" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "roastedAt" : {
+            "format" : "date-time",
+            "type" : "string"
+          },
+          "roastedWeightG" : {
+            "maximum" : 1000000,
+            "minimum" : 0.1,
+            "type" : "number"
+          }
+        },
+        "type" : "object"
+      },
+      "LocationDto" : {
+        "properties" : {
+          "id" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "name" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "LocationRequest" : {
+        "properties" : {
+          "name" : {
+            "maxLength" : 100,
+            "minLength" : 0,
+            "type" : "string"
+          }
+        },
+        "required" : [ "name" ],
+        "type" : "object"
+      },
+      "LotDto" : {
+        "properties" : {
+          "altitudeM" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "archived" : {
+            "type" : "boolean"
+          },
+          "avgDailyUseKg" : {
+            "type" : "number"
+          },
+          "code" : {
+            "type" : "string"
+          },
+          "country" : {
+            "type" : "string"
+          },
+          "createdAt" : {
+            "format" : "date-time",
+            "type" : "string"
+          },
+          "cropYear" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "daysOfStockLeft" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "id" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "minStockKg" : {
+            "type" : "number"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "notes" : {
+            "type" : "string"
+          },
+          "pricePerKg" : {
+            "type" : "number"
+          },
+          "process" : {
+            "type" : "string"
+          },
+          "producer" : {
+            "type" : "string"
+          },
+          "region" : {
+            "type" : "string"
+          },
+          "status" : {
+            "enum" : [ "OK", "LOW", "OUT" ],
+            "type" : "string"
+          },
+          "stockKg" : {
+            "type" : "number"
+          },
+          "supplier" : {
+            "type" : "string"
+          },
+          "variety" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "LotRequest" : {
+        "properties" : {
+          "altitudeM" : {
+            "format" : "int32",
+            "maximum" : 6000,
+            "minimum" : 0,
+            "type" : "integer"
+          },
+          "code" : {
+            "maxLength" : 40,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "country" : {
+            "maxLength" : 80,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "cropYear" : {
+            "format" : "int32",
+            "maximum" : 2100,
+            "minimum" : 1990,
+            "type" : "integer"
+          },
+          "minStockKg" : {
+            "maximum" : 1000000,
+            "minimum" : 0,
+            "type" : "number"
+          },
+          "name" : {
+            "maxLength" : 150,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "notes" : {
+            "maxLength" : 2000,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "pricePerKg" : {
+            "maximum" : 100000,
+            "minimum" : 0,
+            "type" : "number"
+          },
+          "process" : {
+            "maxLength" : 80,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "producer" : {
+            "maxLength" : 150,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "region" : {
+            "maxLength" : 120,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "supplier" : {
+            "maxLength" : 150,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "variety" : {
+            "maxLength" : 120,
+            "minLength" : 0,
+            "type" : "string"
+          }
+        },
+        "required" : [ "code", "country", "name" ],
+        "type" : "object"
+      },
+      "LotUsageDto" : {
+        "properties" : {
+          "code" : {
+            "type" : "string"
+          },
+          "country" : {
+            "type" : "string"
+          },
+          "greenWeightG" : {
+            "type" : "number"
+          },
+          "lotId" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "name" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "LotWeight" : {
+        "properties" : {
+          "greenWeightG" : {
+            "maximum" : 1000000,
+            "minimum" : 0.1,
+            "type" : "number"
+          },
+          "lotId" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        },
+        "required" : [ "greenWeightG", "lotId" ],
+        "type" : "object"
+      },
+      "MetricsDto" : {
+        "properties" : {
+          "averageRorAfterTurningPoint" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "chargeBeanTemp" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "developmentTimeRatioPercent" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "dropBeanTemp" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "dropEstimated" : {
+            "type" : "boolean"
+          },
+          "phases" : {
+            "items" : {
+              "$ref" : "#/components/schemas/PhaseDto"
+            },
+            "type" : "array"
+          },
+          "roastLossPercent" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "totalTimeSeconds" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "turningPointBeanTemp" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "turningPointSeconds" : {
+            "format" : "double",
+            "type" : "number"
+          }
+        },
+        "type" : "object"
+      },
+      "MovementDto" : {
+        "properties" : {
+          "balanceKg" : {
+            "type" : "number"
+          },
+          "id" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "locationId" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "locationName" : {
+            "type" : "string"
+          },
+          "lotId" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "occurredAt" : {
+            "format" : "date-time",
+            "type" : "string"
+          },
+          "quantityKg" : {
+            "type" : "number"
+          },
+          "reason" : {
+            "type" : "string"
+          },
+          "roastId" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "type" : {
+            "enum" : [ "RECEIPT", "ROAST_CONSUMPTION", "ADJUSTMENT", "TRANSFER_IN", "TRANSFER_OUT", "ROAST_REVERSAL" ],
+            "type" : "string"
+          },
+          "typeLabel" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "PageResponseRoastSummaryDto" : {
+        "properties" : {
+          "items" : {
+            "items" : {
+              "$ref" : "#/components/schemas/RoastSummaryDto"
+            },
+            "type" : "array"
+          },
+          "page" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "size" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "totalItems" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "totalPages" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        },
+        "type" : "object"
+      },
+      "PhaseDelta" : {
+        "properties" : {
+          "averageRorDelta" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "durationDeltaSeconds" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "phase" : {
+            "enum" : [ "DRYING", "MAILLARD", "DEVELOPMENT" ],
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "PhaseDto" : {
+        "properties" : {
+          "averageRor" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "durationSeconds" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "endBeanTemp" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "endSeconds" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "estimated" : {
+            "type" : "boolean"
+          },
+          "percentOfTotal" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "phase" : {
+            "type" : "string"
+          },
+          "startBeanTemp" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "startSeconds" : {
+            "format" : "double",
+            "type" : "number"
+          }
+        },
+        "type" : "object"
+      },
+      "ProfileDto" : {
+        "properties" : {
+          "avgDtrPercent" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "avgLossPercent" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "avgTotalTimeSeconds" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "id" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "referenceRoast" : {
+            "$ref" : "#/components/schemas/ReferenceRoastDto"
+          },
+          "roastCount" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        },
+        "type" : "object"
+      },
+      "ProfileRef" : {
+        "properties" : {
+          "id" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "name" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "ProfileRequest" : {
+        "properties" : {
+          "description" : {
+            "maxLength" : 2000,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "name" : {
+            "maxLength" : 120,
+            "minLength" : 0,
+            "type" : "string"
+          }
+        },
+        "required" : [ "name" ],
+        "type" : "object"
+      },
+      "ReceiptRequest" : {
+        "properties" : {
+          "locationId" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "occurredAt" : {
+            "format" : "date-time",
+            "type" : "string"
+          },
+          "quantityKg" : {
+            "maximum" : 1000000,
+            "minimum" : 0.001,
+            "type" : "number"
+          },
+          "reason" : {
+            "maxLength" : 300,
+            "minLength" : 0,
+            "type" : "string"
+          }
+        },
+        "required" : [ "locationId", "quantityKg" ],
+        "type" : "object"
+      },
+      "ReferenceRequest" : {
+        "properties" : {
+          "roastId" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        },
+        "type" : "object"
+      },
+      "ReferenceRoastDto" : {
+        "properties" : {
+          "batchCode" : {
+            "type" : "string"
+          },
+          "id" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "name" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "RoastDetailDto" : {
+        "properties" : {
+          "events" : {
+            "items" : {
+              "$ref" : "#/components/schemas/EventDto"
+            },
+            "type" : "array"
+          },
+          "metrics" : {
+            "$ref" : "#/components/schemas/MetricsDto"
+          },
+          "notes" : {
+            "type" : "string"
+          },
+          "sourceFilename" : {
+            "type" : "string"
+          },
+          "summary" : {
+            "$ref" : "#/components/schemas/RoastSummaryDto"
+          }
+        },
+        "type" : "object"
+      },
+      "RoastSummaryDto" : {
+        "properties" : {
+          "batchCode" : {
+            "type" : "string"
+          },
+          "batchNo" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "developmentSeconds" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "dropBeanTemp" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "dryEndSeconds" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "dtrPercent" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "firstCrackSeconds" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "greenWeightG" : {
+            "type" : "number"
+          },
+          "id" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "lossPercent" : {
+            "format" : "double",
+            "type" : "number"
+          },
+          "lots" : {
+            "items" : {
+              "$ref" : "#/components/schemas/LotUsageDto"
+            },
+            "type" : "array"
+          },
+          "machine" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "profile" : {
+            "$ref" : "#/components/schemas/ProfileRef"
+          },
+          "referenceOfProfile" : {
+            "type" : "boolean"
+          },
+          "roastedAt" : {
+            "format" : "date-time",
+            "type" : "string"
+          },
+          "roastedWeightG" : {
+            "type" : "number"
+          },
+          "sourceFormat" : {
+            "enum" : [ "CSV", "ARTISAN_ALOG", "MANUAL", "DEMO" ],
+            "type" : "string"
+          },
+          "totalTimeSeconds" : {
+            "format" : "double",
+            "type" : "number"
+          }
+        },
+        "type" : "object"
+      },
+      "RoastUpdateRequest" : {
+        "properties" : {
+          "events" : {
+            "additionalProperties" : {
+              "format" : "double",
+              "type" : "number"
+            },
+            "type" : "object"
+          },
+          "machine" : {
+            "maxLength" : 120,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "name" : {
+            "maxLength" : 150,
+            "minLength" : 1,
+            "type" : "string"
+          },
+          "notes" : {
+            "maxLength" : 4000,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "roastedWeightG" : {
+            "maximum" : 1000000,
+            "minimum" : 0.1,
+            "type" : "number"
+          }
+        },
+        "type" : "object"
+      },
+      "StockByLocationDto" : {
+        "properties" : {
+          "locationId" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "locationName" : {
+            "type" : "string"
+          },
+          "stockKg" : {
+            "type" : "number"
+          }
+        },
+        "type" : "object"
+      },
+      "SummaryDto" : {
+        "properties" : {
+          "byCountry" : {
+            "items" : {
+              "$ref" : "#/components/schemas/CountryStockDto"
+            },
+            "type" : "array"
+          },
+          "lotCount" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "lowStockCount" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "outOfStockCount" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "stockValue" : {
+            "type" : "number"
+          },
+          "totalStockKg" : {
+            "type" : "number"
+          }
+        },
+        "type" : "object"
+      },
+      "TransferRequest" : {
+        "properties" : {
+          "fromLocationId" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "quantityKg" : {
+            "maximum" : 1000000,
+            "minimum" : 0.001,
+            "type" : "number"
+          },
+          "toLocationId" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        },
+        "required" : [ "fromLocationId", "quantityKg", "toLocationId" ],
+        "type" : "object"
+      }
+    }
+  },
+  "info" : {
+    "contact" : {
+      "name" : "Vladimir Milivojevic",
+      "url" : "https://github.com/vladimirmilivojevic-creator/roastbench"
+    },
+    "description" : "Roast profile and green coffee inventory API.\n\nImport roast logs (CSV and Artisan .alog), calculate rate of rise, development time ratio and roast loss, compare a batch with a reference profile, and manage green coffee lots with an append-only stock ledger and low-stock alerts. Demo data is synthetic.",
+    "license" : {
+      "name" : "MIT",
+      "url" : "https://opensource.org/licenses/MIT"
+    },
+    "title" : "RoastBench API",
+    "version" : "1.0"
+  },
+  "openapi" : "3.1.0",
+  "paths" : {
+    "/api/dashboard" : {
+      "get" : {
+        "operationId" : "dashboard",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/DashboardDto"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Roast statistics of the last 30 days, stock summary, low-stock alerts, latest roasts",
+        "tags" : [ "Dashboard" ]
+      }
+    },
+    "/api/inventory/alerts" : {
+      "get" : {
+        "operationId" : "alerts",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "items" : {
+                    "$ref" : "#/components/schemas/AlertDto"
+                  },
+                  "type" : "array"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Lots below their minimum stock level, most urgent first",
+        "tags" : [ "Green inventory" ]
+      }
+    },
+    "/api/inventory/summary" : {
+      "get" : {
+        "operationId" : "summary",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/SummaryDto"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Total stock, stock value and counts of low / empty lots",
+        "tags" : [ "Green inventory" ]
+      }
+    },
+    "/api/locations" : {
+      "get" : {
+        "operationId" : "locations",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "items" : {
+                    "$ref" : "#/components/schemas/LocationDto"
+                  },
+                  "type" : "array"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "Green inventory" ]
+      },
+      "post" : {
+        "operationId" : "createLocation",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/LocationRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/LocationDto"
+                }
+              }
+            },
+            "description" : "Created"
+          }
+        },
+        "tags" : [ "Green inventory" ]
+      }
+    },
+    "/api/lots" : {
+      "get" : {
+        "operationId" : "listLots",
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "q",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "in" : "query",
+          "name" : "country",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "in" : "query",
+          "name" : "status",
+          "required" : false,
+          "schema" : {
+            "enum" : [ "OK", "LOW", "OUT" ],
+            "type" : "string"
+          }
+        }, {
+          "in" : "query",
+          "name" : "includeArchived",
+          "required" : false,
+          "schema" : {
+            "default" : false,
+            "type" : "boolean"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "items" : {
+                    "$ref" : "#/components/schemas/LotDto"
+                  },
+                  "type" : "array"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "List green coffee lots with current stock and status",
+        "tags" : [ "Green inventory" ]
+      },
+      "post" : {
+        "operationId" : "createLot",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/LotRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/LotDto"
+                }
+              }
+            },
+            "description" : "Created"
+          }
+        },
+        "summary" : "Create a lot",
+        "tags" : [ "Green inventory" ]
+      }
+    },
+    "/api/lots/{id}" : {
+      "get" : {
+        "operationId" : "getLot",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/LotDto"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "Green inventory" ]
+      },
+      "put" : {
+        "operationId" : "updateLot",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/LotRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/LotDto"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "Green inventory" ]
+      }
+    },
+    "/api/lots/{id}/adjustments" : {
+      "post" : {
+        "operationId" : "adjust",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AdjustmentRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/LotDto"
+                }
+              }
+            },
+            "description" : "Created"
+          }
+        },
+        "summary" : "Correct stock after a count (positive or negative, reason required)",
+        "tags" : [ "Green inventory" ]
+      }
+    },
+    "/api/lots/{id}/archive" : {
+      "post" : {
+        "operationId" : "archive",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/LotDto"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Archive a lot (no more movements; history is kept)",
+        "tags" : [ "Green inventory" ]
+      }
+    },
+    "/api/lots/{id}/movements" : {
+      "get" : {
+        "operationId" : "movements",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "items" : {
+                    "$ref" : "#/components/schemas/MovementDto"
+                  },
+                  "type" : "array"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Stock ledger of a lot, newest first, with the balance after each movement",
+        "tags" : [ "Green inventory" ]
+      }
+    },
+    "/api/lots/{id}/receipts" : {
+      "post" : {
+        "operationId" : "receive",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ReceiptRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/LotDto"
+                }
+              }
+            },
+            "description" : "Created"
+          }
+        },
+        "summary" : "Receive green coffee into a location",
+        "tags" : [ "Green inventory" ]
+      }
+    },
+    "/api/lots/{id}/restore" : {
+      "post" : {
+        "operationId" : "restore",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/LotDto"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "Green inventory" ]
+      }
+    },
+    "/api/lots/{id}/stock" : {
+      "get" : {
+        "operationId" : "stock",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "items" : {
+                    "$ref" : "#/components/schemas/StockByLocationDto"
+                  },
+                  "type" : "array"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Stock of a lot per location",
+        "tags" : [ "Green inventory" ]
+      }
+    },
+    "/api/lots/{id}/transfers" : {
+      "post" : {
+        "operationId" : "transfer",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/TransferRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/LotDto"
+                }
+              }
+            },
+            "description" : "Created"
+          }
+        },
+        "summary" : "Move green coffee between locations",
+        "tags" : [ "Green inventory" ]
+      }
+    },
+    "/api/profiles" : {
+      "get" : {
+        "operationId" : "list",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "items" : {
+                    "$ref" : "#/components/schemas/ProfileDto"
+                  },
+                  "type" : "array"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "List profiles with roast count and average DTR, loss and time",
+        "tags" : [ "Profiles" ]
+      },
+      "post" : {
+        "operationId" : "create",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ProfileRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ProfileDto"
+                }
+              }
+            },
+            "description" : "Created"
+          }
+        },
+        "tags" : [ "Profiles" ]
+      }
+    },
+    "/api/profiles/{id}" : {
+      "delete" : {
+        "operationId" : "delete",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          }
+        },
+        "summary" : "Delete a profile; its roasts are kept without a profile",
+        "tags" : [ "Profiles" ]
+      },
+      "get" : {
+        "operationId" : "get",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ProfileDto"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "Profiles" ]
+      },
+      "put" : {
+        "operationId" : "update",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ProfileRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ProfileDto"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "tags" : [ "Profiles" ]
+      }
+    },
+    "/api/profiles/{id}/reference" : {
+      "put" : {
+        "operationId" : "setReference",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ReferenceRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ProfileDto"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Set the reference roast of a profile (null clears it)",
+        "tags" : [ "Profiles" ]
+      }
+    },
+    "/api/roasts" : {
+      "get" : {
+        "description" : "sort is one of roastedAt, batchNo, name, dtr, loss, totalTime, dropTemp; direction is asc or desc",
+        "operationId" : "list_1",
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "q",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "in" : "query",
+          "name" : "profileId",
+          "required" : false,
+          "schema" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        }, {
+          "in" : "query",
+          "name" : "lotId",
+          "required" : false,
+          "schema" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        }, {
+          "in" : "query",
+          "name" : "from",
+          "required" : false,
+          "schema" : {
+            "format" : "date-time",
+            "type" : "string"
+          }
+        }, {
+          "in" : "query",
+          "name" : "to",
+          "required" : false,
+          "schema" : {
+            "format" : "date-time",
+            "type" : "string"
+          }
+        }, {
+          "in" : "query",
+          "name" : "sort",
+          "required" : false,
+          "schema" : {
+            "default" : "roastedAt",
+            "type" : "string"
+          }
+        }, {
+          "in" : "query",
+          "name" : "direction",
+          "required" : false,
+          "schema" : {
+            "default" : "desc",
+            "type" : "string"
+          }
+        }, {
+          "in" : "query",
+          "name" : "page",
+          "required" : false,
+          "schema" : {
+            "default" : 0,
+            "format" : "int32",
+            "type" : "integer"
+          }
+        }, {
+          "in" : "query",
+          "name" : "size",
+          "required" : false,
+          "schema" : {
+            "default" : 20,
+            "format" : "int32",
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PageResponseRoastSummaryDto"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "List roasts (filter, sort, page)",
+        "tags" : [ "Roasts" ]
+      }
+    },
+    "/api/roasts/compare" : {
+      "get" : {
+        "operationId" : "compare",
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "ids",
+          "required" : true,
+          "schema" : {
+            "items" : {
+              "format" : "int64",
+              "type" : "integer"
+            },
+            "type" : "array"
+          }
+        }, {
+          "in" : "query",
+          "name" : "rorWindowSeconds",
+          "required" : false,
+          "schema" : {
+            "default" : 30.0,
+            "format" : "double",
+            "type" : "number"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CompareResponse"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Curves, events and metrics of up to 10 roasts for an overlay chart",
+        "tags" : [ "Roasts" ]
+      }
+    },
+    "/api/roasts/import" : {
+      "post" : {
+        "operationId" : "importRoast",
+        "requestBody" : {
+          "content" : {
+            "multipart/form-data" : {
+              "schema" : {
+                "properties" : {
+                  "file" : {
+                    "format" : "binary",
+                    "type" : "string"
+                  },
+                  "request" : {
+                    "$ref" : "#/components/schemas/ImportRequest"
+                  }
+                },
+                "required" : [ "file" ],
+                "type" : "object"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RoastDetailDto"
+                }
+              }
+            },
+            "description" : "Created"
+          }
+        },
+        "summary" : "Import a roast log; green coffee of the given lots is deducted from stock",
+        "tags" : [ "Roasts" ]
+      }
+    },
+    "/api/roasts/import/preview" : {
+      "post" : {
+        "operationId" : "preview",
+        "requestBody" : {
+          "content" : {
+            "multipart/form-data" : {
+              "schema" : {
+                "properties" : {
+                  "file" : {
+                    "format" : "binary",
+                    "type" : "string"
+                  }
+                },
+                "required" : [ "file" ],
+                "type" : "object"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ImportPreviewDto"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Parse and analyse a CSV or Artisan .alog file without saving it",
+        "tags" : [ "Roasts" ]
+      }
+    },
+    "/api/roasts/{id}" : {
+      "delete" : {
+        "operationId" : "delete_1",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          }
+        },
+        "summary" : "Delete a roast; its green coffee goes back into stock",
+        "tags" : [ "Roasts" ]
+      },
+      "get" : {
+        "operationId" : "get_1",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RoastDetailDto"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "A roast with its events, phases, development time ratio and roast loss",
+        "tags" : [ "Roasts" ]
+      },
+      "patch" : {
+        "operationId" : "update_1",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/RoastUpdateRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RoastDetailDto"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Edit name, notes, roasted weight or marked events; metrics are recalculated",
+        "tags" : [ "Roasts" ]
+      }
+    },
+    "/api/roasts/{id}/comparison" : {
+      "get" : {
+        "description" : "Without referenceId the reference roast of the roast's profile is used.",
+        "operationId" : "comparison",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        }, {
+          "in" : "query",
+          "name" : "referenceId",
+          "required" : false,
+          "schema" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        }, {
+          "in" : "query",
+          "name" : "rorWindowSeconds",
+          "required" : false,
+          "schema" : {
+            "default" : 30.0,
+            "format" : "double",
+            "type" : "number"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ComparisonDto"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Difference to a reference roast",
+        "tags" : [ "Roasts" ]
+      }
+    },
+    "/api/roasts/{id}/curve" : {
+      "get" : {
+        "operationId" : "curve",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        }, {
+          "in" : "query",
+          "name" : "rorWindowSeconds",
+          "required" : false,
+          "schema" : {
+            "default" : 30.0,
+            "format" : "double",
+            "type" : "number"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CurveDto"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Bean and environment temperature samples with the rate of rise (C/min)",
+        "tags" : [ "Roasts" ]
+      }
+    },
+    "/api/roasts/{id}/profile" : {
+      "put" : {
+        "operationId" : "assignProfile",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AssignProfileRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RoastDetailDto"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Assign the roast to a profile (null removes it)",
+        "tags" : [ "Roasts" ]
+      }
+    }
+  },
+  "tags" : [ {
+    "description" : "Roast profiles and their reference roast",
+    "name" : "Profiles"
+  }, {
+    "description" : "Import roast logs, analyse them and compare with a reference roast",
+    "name" : "Roasts"
+  }, {
+    "description" : "Numbers for the start page",
+    "name" : "Dashboard"
+  }, {
+    "description" : "Lots, locations, stock movements and low-stock alerts",
+    "name" : "Green inventory"
+  } ]
+}

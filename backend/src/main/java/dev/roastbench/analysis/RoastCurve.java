@@ -63,6 +63,11 @@ public final class RoastCurve {
         return timeSeconds.length;
     }
 
+    /** Bean temperature at {@code seconds}, linearly interpolated; clamped to the first and last sample. */
+    public double beanTempAt(double seconds) {
+        return CurveMath.valueAt(timeSeconds, beanTemp, seconds);
+    }
+
     public double firstTime() {
         return timeSeconds[0];
     }

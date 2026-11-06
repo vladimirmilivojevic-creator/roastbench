@@ -23,9 +23,11 @@ jobs:
           distribution: temurin
           java-version: '21'
           cache: maven
+      # Unit tests, then integration tests against a real PostgreSQL 16 started by Testcontainers.
+      # (Locally the same tests run against embedded PostgreSQL binaries, which needs no Docker.)
       - name: Build and test
         working-directory: backend
-        run: ./mvnw -B -ntp verify
+        run: ./mvnw -B -ntp verify -Droastbench.test.db=testcontainers
       - name: Upload coverage report
         if: always()
         uses: actions/upload-artifact@v4

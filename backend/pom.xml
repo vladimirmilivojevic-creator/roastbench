@@ -23,6 +23,10 @@
         <zonky.postgres.version>16.15.0</zonky.postgres.version>
         <zonky.embedded.version>2.2.2</zonky.embedded.version>
         <jacoco.version>0.8.13</jacoco.version>
+        <!-- Database for integration tests: "embedded" (real PostgreSQL binaries, no Docker) or "testcontainers". -->
+        <roastbench.test.db>embedded</roastbench.test.db>
+        <!-- Set to true to regenerate docs/openapi.json from the running application. -->
+        <openapi.update>false</openapi.update>
     </properties>
 
     <dependencyManagement>
@@ -135,6 +139,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
+                <configuration>
+                    <systemPropertyVariables>
+                        <roastbench.test.db>${roastbench.test.db}</roastbench.test.db>
+                        <openapi.update>${openapi.update}</openapi.update>
+                    </systemPropertyVariables>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
