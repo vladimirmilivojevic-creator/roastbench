@@ -22,6 +22,8 @@ public final class DevApplication {
 
     public static void main(String[] args) {
         System.setProperty("roastbench.demo.seed-on-startup", "true");
+        // Lets a developer reset the demo data: curl -X POST -H "X-Admin-Token: dev" localhost:8080/api/admin/demo/reset
+        System.setProperty("roastbench.admin-token", "dev");
         SpringApplication.from(RoastBenchApplication::main).with(DevDatabase.class).run(args);
     }
 

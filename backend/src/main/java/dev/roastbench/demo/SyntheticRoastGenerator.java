@@ -99,6 +99,8 @@ public final class SyntheticRoastGenerator {
         double dryEnd = timeAtBeanTemp(spec, DRY_END_TEMP);
         double drop = firstCrack + spec.developmentSeconds();
         double firstCrackEnd = Math.min(firstCrack + FIRST_CRACK_END_AFTER_START, drop - 10);
+        // Events and samples live on the logging grid: work with the drop that lands on a sample.
+        drop = snap(drop, dt);
 
         double dropBt = cleanBeanTemp(spec, drop);
         int roastSamples = (int) Math.round(drop / dt) + 1;
@@ -116,10 +118,10 @@ public final class SyntheticRoastGenerator {
             time[i] = t;
             btNoise = 0.6 * btNoise + 0.4 * 0.18 * random.nextGaussian();
             etNoise = 0.8 * etNoise + 0.2 * 0.4 * random.nextGaussian();
-            double cleanBt = t <= drop ? cleanBeanTemp(spec, t)
+            double cleanBt = t <= drop + 1e-9 ? cleanBeanTemp(spec, t)
                     : 25 + (dropBt - 25) * Math.exp(-(t - drop) / 110.0);
             bt[i] = round1(cleanBt + btNoise);
-            double cleanEt = t <= drop ? cleanEnvTemp(spec, t)
+            double cleanEt = t <= drop + 1e-9 ? cleanEnvTemp(spec, t)
                     : 25 + (cleanEnvTemp(spec, drop) - 25) * Math.exp(-(t - drop) / 140.0);
             et[i] = round1(cleanEt + etNoise);
         }

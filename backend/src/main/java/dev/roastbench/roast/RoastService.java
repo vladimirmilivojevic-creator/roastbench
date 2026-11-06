@@ -167,8 +167,9 @@ public class RoastService {
         for (LotWeight lw : ordered) {
             roastLots.save(new RoastLotEntity(roast.getId(), lw.lotId(), lw.greenWeightG().setScale(1,
                     RoundingMode.HALF_UP)));
-            inventory.consumeForRoast(roast.getId(), lw.lotId(), lw.greenWeightG().divide(BigDecimal.valueOf(1000), 3,
-                    RoundingMode.HALF_UP), roastedAt.isAfter(Instant.now(clock)) ? Instant.now(clock) : roastedAt);
+            inventory.consumeForRoast(roast.getId(), roast.batchCode(), lw.lotId(),
+                    lw.greenWeightG().divide(BigDecimal.valueOf(1000), 3, RoundingMode.HALF_UP),
+                    roastedAt.isAfter(Instant.now(clock)) ? Instant.now(clock) : roastedAt);
         }
         return detail(roast.getId());
     }
@@ -304,7 +305,7 @@ public class RoastService {
     @Transactional
     public void delete(long id) {
         Roast roast = roasts.findById(id).orElseThrow(() -> new NotFoundException("Roast", id));
-        inventory.reverseRoast(id);
+        inventory.reverseRoast(id, roast.batchCode());
         roasts.delete(roast);
         roasts.flush();
     }

@@ -221,7 +221,7 @@ public class InventoryService {
      * Must run in the roast's transaction so a failure rolls the whole roast back.
      */
     @Transactional
-    public void consumeForRoast(long roastId, long lotId, BigDecimal kilograms, Instant at) {
+    public void consumeForRoast(long roastId, String roastLabel, long lotId, BigDecimal kilograms, Instant at) {
         Lot lot = lockActiveLot(lotId);
         BigDecimal needed = scale(kilograms);
         Map<Long, BigDecimal> stock = new HashMap<>();
@@ -229,21 +229,21 @@ public class InventoryService {
             stock.put(s.getLocationId(), s.getStockKg());
         }
         Map<Long, BigDecimal> allocation = StockAllocator.allocate(lot.getCode(), stock, needed);
-        String reason = "Roast " + roastId;
+        String reason = "Roast " + roastLabel;
         allocation.forEach((locationId, kg) ->
                 post(lotId, locationId, MovementType.ROAST_CONSUMPTION, kg.negate(), roastId, reason, at));
     }
 
     /** Puts the green coffee of a roast that is being deleted back into stock. */
     @Transactional
-    public void reverseRoast(long roastId) {
+    public void reverseRoast(long roastId, String roastLabel) {
         List<StockMovement> consumed = movements.findByRoastIdAndType(roastId, MovementType.ROAST_CONSUMPTION);
         for (Long lotId : new TreeSet<>(consumed.stream().map(StockMovement::getLotId).toList())) {
             lots.findByIdForUpdate(lotId); // consistent lock order: ascending lot id
         }
         for (StockMovement m : consumed) {
             post(m.getLotId(), m.getLocationId(), MovementType.ROAST_REVERSAL, m.getQuantityKg().negate(), roastId,
-                    "Roast " + roastId + " deleted", null);
+                    "Roast " + roastLabel + " deleted", null);
         }
     }
 
