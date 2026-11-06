@@ -1,0 +1,32 @@
+# Render blueprint for the API (free plan). Create it with: Render dashboard > New > Blueprint > pick this repository.
+# The database is not on Render (its free PostgreSQL expires after 30 days): use Neon, see docs/deployment.md.
+services:
+  - type: web
+    name: roastbench-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    healthCheckPath: /actuator/health
+    autoDeploy: true
+    envVars:
+      # JDBC URL of the Neon database, e.g. jdbc:postgresql://<host>/<db>?sslmode=require
+      - key: SPRING_DATASOURCE_URL
+        sync: false
+      - key: SPRING_DATASOURCE_USERNAME
+        sync: false
+      - key: SPRING_DATASOURCE_PASSWORD
+        sync: false
+      # Browser origin of the web app that may call this API.
+      - key: ROASTBENCH_CORS_ALLOWED_ORIGINS
+        value: https://vladimirmilivojevic-creator.github.io
+      # Token for POST /api/admin/demo/reset (nightly reset of the public demo).
+      - key: ADMIN_TOKEN
+        generateValue: true
+      - key: SEED_DEMO_DATA
+        value: "true"
+      # Free instances have 512 MB and a fraction of a CPU.
+      - key: JAVA_TOOL_OPTIONS
+        value: -Xmx300m -XX:+UseSerialGC -XX:TieredStopAtLevel=1 -Xss512k -XX:+ExitOnOutOfMemoryError
+      - key: SPRING_JPA_OPEN_IN_VIEW
+        value: "false"

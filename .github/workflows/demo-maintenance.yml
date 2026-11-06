@@ -1,0 +1,37 @@
+name: Demo maintenance
+
+# Keeps the free demo API awake and resets the public demo data every night.
+# Needs the repository variable API_URL and the secret DEMO_ADMIN_TOKEN (the API's ADMIN_TOKEN).
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'   # keep-warm ping
+    - cron: '17 3 * * *'     # nightly reset
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  keep-warm:
+    if: github.event.schedule == '*/10 * * * *' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping the API
+        env:
+          API_URL: ${{ vars.API_URL }}
+        run: |
+          if [ -z "$API_URL" ]; then echo "API_URL is not set, nothing to ping"; exit 0; fi
+          curl --fail --silent --show-error --max-time 120 --retry 3 --retry-delay 15 "$API_URL/actuator/health"
+
+  reset-demo:
+    if: github.event.schedule == '17 3 * * *' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Reset the demo data
+        env:
+          API_URL: ${{ vars.API_URL }}
+          TOKEN: ${{ secrets.DEMO_ADMIN_TOKEN }}
+        run: |
+          if [ -z "$API_URL" ] || [ -z "$TOKEN" ]; then echo "API_URL or DEMO_ADMIN_TOKEN is not set, skipping"; exit 0; fi
+          curl --fail --silent --show-error --max-time 180 --retry 3 --retry-delay 20 \
+            -X POST -H "X-Admin-Token: $TOKEN" "$API_URL/api/admin/demo/reset"

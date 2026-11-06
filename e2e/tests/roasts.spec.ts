@@ -55,9 +55,11 @@ test.describe('roast list, detail and comparison', () => {
 
   test('overlays several roasts and shows differences to a chosen reference', async ({ page }) => {
     await page.goto('/roasts');
-    await page.getByRole('checkbox', { name: /Select PR-0001/ }).check();
-    await page.getByRole('checkbox', { name: /Select PR-0002/ }).check();
-    await page.getByRole('checkbox', { name: /Select PR-0003/ }).check();
+    const rows = page.getByTestId('roast-row');
+    await expect(rows).toHaveCount(20);
+    for (const index of [0, 1, 2]) {
+      await rows.nth(index).getByRole('checkbox').check(); // the three newest roasts
+    }
 
     await page.getByRole('button', { name: 'Compare (3)' }).click();
 
@@ -68,7 +70,7 @@ test.describe('roast list, detail and comparison', () => {
     await expect(stats.getByRole('columnheader')).toHaveCount(4);
 
     await page.getByRole('combobox', { name: 'Reference roast' }).click();
-    await page.getByRole('option', { name: /PR-0002/ }).click();
+    await page.getByRole('option').nth(1).click(); // option 0 is "None"
     await expectChartDrawn(page.getByTestId('deviation-chart'));
     await expect(stats).toContainText('(ref)');
   });
