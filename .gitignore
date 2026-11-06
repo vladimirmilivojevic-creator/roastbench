@@ -1,0 +1,31 @@
+# --- Private application documents (contain contact details) - never commit ---
+/1_Cropster_*.pdf
+/private/
+
+# --- OS / editors ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.iml
+
+# --- Java / Maven ---
+backend/target/
+*.class
+*.log
+hs_err_pid*
+
+# --- Node / frontend / e2e ---
+node_modules/
+frontend/dist/
+frontend/coverage/
+e2e/test-results/
+e2e/playwright-report/
+e2e/blob-report/
+*.tsbuildinfo
+
+# --- Local env files / secrets ---
+.env
+.env.*
+!.env.example
+*.pem
