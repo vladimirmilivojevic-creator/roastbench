@@ -32,4 +32,11 @@ class OpenApiIT extends AbstractIntegrationTest {
     void reportsHealth() {
         given().get("/actuator/health").then().statusCode(200).body("status", equalTo("UP"));
     }
+
+    @Test
+    void healthCheckCanBeReadByTheWebsiteFromAnotherAddress() {
+        // the website on GitHub Pages is a different origin than the API
+        given().header("Origin", "http://localhost:5173").get("/actuator/health").then().statusCode(200)
+                .header("Access-Control-Allow-Origin", "http://localhost:5173");
+    }
 }

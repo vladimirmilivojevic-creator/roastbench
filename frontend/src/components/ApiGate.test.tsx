@@ -7,7 +7,7 @@ afterEach(() => vi.unstubAllGlobals());
 
 describe('ApiGate', () => {
   it('shows the app as soon as the API answers', async () => {
-    mockApi({ '/actuator/health': { status: 'UP' } });
+    mockApi({ '/api/locations': [] });
 
     renderWithProviders(
       <ApiGate>
@@ -21,7 +21,7 @@ describe('ApiGate', () => {
 
   it('explains the wait while the API is asleep and continues by itself', async () => {
     let up = false;
-    mockApi({ '/actuator/health': () => (up ? { status: 'UP' } : new Response('', { status: 503 })) });
+    mockApi({ '/api/locations': () => (up ? [] : new Response('', { status: 503 })) });
 
     renderWithProviders(
       <ApiGate>

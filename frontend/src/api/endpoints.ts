@@ -84,5 +84,6 @@ export const dashboardApi = {
 };
 
 export const healthApi = {
-  check: () => http.get<{ status: string }>('/actuator/health'),
+  // Any small call to /api shows that the server is awake and the database answers.
+  check: () => http.get<unknown[]>('/api/locations'),
 };

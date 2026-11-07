@@ -40,6 +40,10 @@ management:
     web:
       exposure:
         include: health,info,metrics
+      # The website (on another address) may read the health check. /api has its own CORS setting in WebConfig.
+      cors:
+        allowed-origins: ${roastbench.cors-allowed-origins}
+        allowed-methods: GET
   endpoint:
     health:
       probes:
