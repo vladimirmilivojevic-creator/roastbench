@@ -14,13 +14,9 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * Reads Artisan ({@code .alog}) roast profiles.
- *
- * <p>Fields used (see Artisan {@code ProfileData}): {@code timex} (seconds since recording start), {@code temp1}
- * (environment temperature), {@code temp2} (bean temperature), {@code timeindex} (indices into {@code timex} of
- * CHARGE, DRY, FCs, FCe, SCs, SCe, DROP, COOL), {@code weight} ({@code [in, out, unit]}), {@code mode} ({@code C}
- * or {@code F}), {@code title}, {@code beans}, {@code roastertype}, {@code roastepoch} / {@code roastisodate} +
- * {@code roasttime}. Artisan stores {@code -1} for a missing reading and {@code 0} or {@code -1} for an unset event.
+ * Reads Artisan .alog files. Fields we use: timex (time), temp2 (bean temperature), temp1 (environment temperature),
+ * timeindex (where the events are), weight, mode (C or F), title, beans and roastertype.
+ * Artisan writes -1 when there is no reading.
  */
 public final class ArtisanAlogParser {
 

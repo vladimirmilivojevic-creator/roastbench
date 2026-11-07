@@ -1,115 +1,184 @@
-# RoastBench
+<div align="center">
 
-[![CI](https://github.com/vladimirmilivojevic-creator/roastbench/actions/workflows/ci.yml/badge.svg)](https://github.com/vladimirmilivojevic-creator/roastbench/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-![Java 21](https://img.shields.io/badge/Java-21-orange)
-![Spring Boot 3](https://img.shields.io/badge/Spring%20Boot-3-6db33f)
-![React + TypeScript](https://img.shields.io/badge/React-TypeScript-3178c6)
+<img src="docs/banner.svg" alt="RoastBench: roast profiles and green coffee stock" width="100%">
 
-**Roast profile and green coffee inventory app for small roasteries.** Import a roast log, see its rate of rise,
-development time ratio and roast loss, compare it with the reference profile in an interactive chart, and keep track of
-the green coffee that goes into every batch.
+<br>
 
-![A roast compared with the reference roast of its profile](docs/screenshots/roast-detail.png)
+### Keep your roasts and your green coffee stock in one place
 
-> **The data in this repository and in the demo is synthetic.** The roast curves are generated to look like drum roasts
-> (a turning point, a decaying rate of rise, first crack, development); they do not come from a real roaster.
+<br>
 
-## What it does
+[![CI](https://img.shields.io/github/actions/workflow/status/vladimirmilivojevic-creator/roastbench/ci.yml?branch=main&label=CI&style=for-the-badge)](https://github.com/vladimirmilivojevic-creator/roastbench/actions/workflows/ci.yml)
+[![License](https://img.shields.io/badge/license-all%20rights%20reserved-lightgrey?style=for-the-badge)](LICENSE)
 
-- **Imports roast logs** from CSV and from [Artisan](https://github.com/artisan-roaster-scope/artisan) `.alog` files,
-  with a preview that shows the curve, the metrics and any assumptions *before* anything is saved.
-  ([formats](docs/import-formats.md))
-- **Calculates** the rate of rise (RoR), the development time ratio (DTR) and the roast loss, and splits every roast into
-  drying, Maillard and development phases.
-- **Compares** a batch with the reference roast of its profile (differences in temperature over time, dry end, first
-  crack, drop, DTR, loss) or lays up to ten batches over each other.
-- **Tracks green coffee**: lots with origin details, an append-only stock ledger (deliveries, corrections, transfers,
-  roasts), automatic deduction when a roast is imported, **low-stock alerts** and a days-of-stock projection.
-- **REST API documented with OpenAPI**: Swagger UI at `/swagger-ui.html`, the contract in
-  [`docs/openapi.json`](docs/openapi.json) (checked by a test, so it cannot drift).
+![Java](https://img.shields.io/badge/Java_21-ED8B00?style=flat-square&logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot_3-6DB33F?style=flat-square&logo=springboot&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![MUI](https://img.shields.io/badge/MUI-007FFF?style=flat-square&logo=mui&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white)
+
+**[Live demo](https://vladimirmilivojevic-creator.github.io/roastbench/)** &nbsp;·&nbsp;
+**[Screenshots](#screenshots)** &nbsp;·&nbsp;
+**[How it works](#how-it-works)** &nbsp;·&nbsp;
+**[Quick start](#quick-start)**
+
+</div>
+
+> **Note:** the live demo runs on a free server. If nobody used it for a while, the first page can take up to
+> 1 minute to open. After that it is fast.
+
+---
+
+## What is RoastBench?
+
+RoastBench is a web app for small coffee roasteries. A roaster has two daily questions:
+
+1. **"Did this roast turn out like my best roast?"**
+2. **"How much green coffee do I have left?"**
+
+RoastBench answers both. You load a roast file, the app draws the roast and calculates the important numbers, and it
+compares the roast with your best one. At the same time it counts your green coffee: every roast takes its coffee out of
+stock, and you get a warning before a lot runs out.
+
+## Screenshots
+
+<table>
+  <tr>
+    <td width="50%"><b>Dashboard</b><br><img src="docs/screenshots/dashboard.png" alt="Dashboard"></td>
+    <td width="50%"><b>Green coffee stock</b><br><img src="docs/screenshots/inventory.png" alt="Green coffee stock"></td>
+  </tr>
+  <tr>
+    <td width="50%"><b>Compare roasts</b><br><img src="docs/screenshots/compare.png" alt="Compare roasts"></td>
+    <td width="50%"><b>Import a roast file</b><br><img src="docs/screenshots/import.png" alt="Import a roast file"></td>
+  </tr>
+</table>
+
+<details>
+<summary><b>One roast, compared with the reference roast (click to open)</b></summary>
+<br>
+<img src="docs/screenshots/roast-detail.png" alt="Roast detail with chart and comparison">
+</details>
+
+## Features
 
 | | |
 |---|---|
-| ![Dashboard](docs/screenshots/dashboard.png) | ![Green coffee](docs/screenshots/inventory.png) |
-| ![Compare roasts](docs/screenshots/compare.png) | ![Import preview](docs/screenshots/import.png) |
+| 📥 **Import roast files** | CSV and [Artisan](https://github.com/artisan-roaster-scope/artisan) `.alog` files. You see a preview before anything is saved. |
+| 📈 **Roast chart** | Bean temperature, environment temperature and rate of rise. Zoom in, switch lines on and off. |
+| 🔢 **The key numbers** | RoR, DTR (development time ratio) and roast loss. The roast is split into drying, Maillard and development. |
+| ⭐ **Reference roast** | Mark your best roast. Every other roast of that profile is compared with it. You can also put up to 10 roasts on one chart. |
+| 🫘 **Green coffee stock** | Lots with country, farm and process. Deliveries, corrections and moves between places. |
+| 🔔 **Low-stock warnings** | Set a minimum per lot. The app also tells you how many days the coffee will last. |
+| 🧾 **API documentation** | Every endpoint is documented with OpenAPI (Swagger UI). |
+| 🌗 **Light and dark theme** | Works on desktop and phone. |
 
-## Run it
+## How it works
 
-### With Docker (one command)
+```mermaid
+flowchart LR
+    A["🖥️ Browser<br/>React + TypeScript"] -->|"REST / JSON"| B["⚙️ API<br/>Java + Spring Boot"]
+    B -->|"SQL"| C[("🗄️ PostgreSQL")]
+```
+
+**What happens when you import a roast file**
+
+1. You drop a CSV or `.alog` file. The API **reads** it and finds the temperatures and events (charge, first crack, drop).
+2. The API **calculates** RoR, DTR, roast loss and the phases, and sends everything back as a **preview**.
+3. You check the chart, choose the coffee lots you used, and press *Import*.
+4. In **one database transaction** the API saves the roast, takes the coffee out of stock and writes a line in the stock
+   list. If there is not enough coffee, nothing is saved.
+5. The roast is now in the list, and you can compare it with the reference roast.
+
+## The roast numbers
+
+| Name | Meaning | How it is calculated |
+|---|---|---|
+| **RoR** (rate of rise) | How fast the bean temperature goes up, in °C per minute | The slope of the temperature line over a short time window (30 seconds) |
+| **Turning point** | The coldest moment after the beans go in | The lowest bean temperature in the first minutes |
+| **DTR** (development time ratio) | How much of the roast is "development" | time from first crack to drop ÷ total time × 100 |
+| **Roast loss** | How much weight the beans lose | (green weight − roasted weight) ÷ green weight × 100 |
+
+More details are in [docs/import-formats.md](docs/import-formats.md).
+
+## Quick start
+
+**With Docker** (one command):
 
 ```bash
 docker compose up
 ```
 
-Open <http://localhost:8080>. The first start builds the images and fills the database with synthetic demo data;
-Swagger UI is at <http://localhost:8080/swagger-ui.html>. `docker compose down -v` removes everything.
+Open **http://localhost:8080**. The first start builds the images and fills the database with example data.
+The API documentation is at http://localhost:8080/swagger-ui.html.
 
-### Without Docker (development)
-
-Needs JDK 21 or newer and Node 22. No database to install: the backend starts real PostgreSQL binaries in-process.
+**Without Docker** (you need Java 21 and Node 22; no database to install):
 
 ```bash
-# terminal 1 - API on :8080 with embedded PostgreSQL and demo data (kept in backend/.dev-data)
+# Terminal 1: the API on port 8080 (it starts its own PostgreSQL)
 cd backend
 ./mvnw spring-boot:test-run
 
-# terminal 2 - web app on :5173
+# Terminal 2: the website on port 5173
 cd frontend
 npm install
 npm run dev
 ```
 
-Open <http://localhost:5173>. To start over with fresh demo data:
-`curl -X POST -H "X-Admin-Token: dev" localhost:8080/api/admin/demo/reset`.
+Open **http://localhost:5173**.
 
 ## Tests
 
 ```bash
-cd backend  && ./mvnw verify          # unit + integration tests (embedded PostgreSQL, no Docker needed)
-cd frontend && npm test               # Vitest: domain logic, API client, components
-cd e2e && npm ci && npx playwright install chromium && npm test   # against a running app, see e2e/playwright.config.ts
+cd backend  && ./mvnw verify    # unit tests + integration tests with a real PostgreSQL
+cd frontend && npm test         # frontend tests
 ```
 
-CI ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)) runs three jobs: the backend against PostgreSQL started by
-**Testcontainers**, the frontend (lint, type check, tests, build), and **end-to-end tests with Playwright against
-`docker compose up`**, which is also the proof that the one-command start works.
+| Level | Tool | What is tested |
+|---|---|---|
+| Unit tests | JUnit 5 | The roast calculations, the file readers, the stock rules |
+| Integration tests | JUnit 5, Rest Assured, Testcontainers | Every endpoint with a real PostgreSQL. For example: importing a roast takes coffee out of stock, and two roasts at the same time cannot use the same coffee twice |
+| Frontend tests | Vitest | Number formatting, the chart settings, the pages |
+| Browser tests | Playwright | The whole app in a real browser, started with `docker compose up` |
 
-| Level | What is tested |
-|---|---|
-| Unit (JUnit 5) | roast mathematics with hand-computed cases, CSV and `.alog` parsers incl. malformed and hostile input, stock allocation |
-| Integration (JUnit 5, Rest Assured, PostgreSQL) | migrations, every endpoint, import → stock deduction → alert, rollback on insufficient stock, concurrent roasts on one lot, OpenAPI snapshot |
-| Frontend (Vitest, Testing Library) | formatting, chart option builder, API errors, wake-up gate, dashboard, import wizard |
-| End to end (Playwright) | import with stock deduction, painted charts, comparison, event editing, inventory alerts |
+**GitHub Actions** runs all of this on every push (see the badge at the top).
 
-## How it is built
+## Project structure
 
 ```
-backend/    Spring Boot 3 (Java 21): analysis/ imports/ roast/ profile/ inventory/ demo/ common/, Flyway migrations
-frontend/   React + TypeScript + MUI + Apache ECharts; src/domain holds framework-free logic
-e2e/        Playwright tests (and the script that takes the screenshots above)
-samples/    synthetic roast logs in both import formats
-docs/       architecture, import formats, OpenAPI contract
+roastbench/
+├── backend/     Java API (Spring Boot)
+│   └── src/main/java/dev/roastbench/
+│       ├── analysis/    the roast calculations (RoR, DTR, loss, comparison)
+│       ├── imports/     reads CSV and Artisan .alog files
+│       ├── roast/       roasts: save, list, compare
+│       ├── profile/     profiles and the reference roast
+│       ├── inventory/   lots and the stock list
+│       └── demo/        example data
+├── frontend/    React website
+│   └── src/
+│       ├── pages/       one file per page
+│       ├── components/  buttons, chart, dialogs
+│       ├── api/         talks to the API
+│       └── domain/      formatting and chart settings
+├── e2e/         browser tests (Playwright)
+├── samples/     example roast files (CSV and .alog)
+└── docs/        extra documentation and screenshots
 ```
 
-The interesting parts are deliberately framework-free so they are easy to read and test:
+## About the data
 
-- [`analysis`](backend/src/main/java/dev/roastbench/analysis): rate of rise as a windowed regression slope, phases, DTR,
-  roast loss, turning point, reference comparison.
-- [`imports`](backend/src/main/java/dev/roastbench/imports): the CSV reader and an Artisan reader built on a small
-  Python-literal parser that never evaluates anything.
-- [`frontend/src/domain`](frontend/src/domain): number formatting and the ECharts option builder.
-
-Stock is a **ledger**: a lot's stock is the sum of append-only movements, every posting locks the lot row, and a roast
-and its deduction are one transaction. [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) explains this and the other
-decisions, with diagrams.
-
-## Stack
-
-Java 21 · Spring Boot 3 · Spring Data JPA · Flyway · PostgreSQL · springdoc OpenAPI · JUnit 5 · Rest Assured ·
-Testcontainers · React · TypeScript · MUI · TanStack Query · Apache ECharts · Vitest · Playwright · Docker ·
-GitHub Actions
+All roasts and coffee lots in this project are **made up**. The roast curves are generated by a small program so they
+look like real roasts. They were not recorded on a real roaster.
 
 ## License
 
-[MIT](LICENSE) · Vladimir Milivojevic
+This project is **not open source**. You may read the code and run it on your own computer to look at the project. You
+may not copy it, use it in another project, or run it for other people. See [LICENSE](LICENSE).
+
+## Author
+
+**Vladimir Milivojevic**, software developer, Innsbruck, Austria
+· [github.com/vladimirmilivojevic-creator](https://github.com/vladimirmilivojevic-creator)

@@ -3,14 +3,7 @@ package dev.roastbench.analysis;
 import java.util.EnumMap;
 import java.util.Map;
 
-/**
- * Everything the analyzer needs about one roast.
- *
- * @param curve          temperature samples, time relative to CHARGE
- * @param events         event times in seconds since CHARGE (CHARGE itself is implicit at 0)
- * @param greenWeightG   green coffee weight in grams, may be {@code null}
- * @param roastedWeightG roasted coffee weight in grams, may be {@code null}
- */
+/** Everything the calculation needs: the curve, the events (seconds from charge) and the weights in grams. */
 public record AnalysisInput(RoastCurve curve, Map<EventType, Double> events, Double greenWeightG,
                             Double roastedWeightG) {
 

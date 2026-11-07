@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="320" viewBox="0 0 1280 320" role="img" aria-label="RoastBench: roast profiles and green coffee stock">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#241610"/>
+      <stop offset="1" stop-color="#5d4037"/>
+    </linearGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffb74d"/>
+      <stop offset="1" stop-color="#ff7043"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1280" height="320" rx="24" fill="url(#bg)"/>
+
+  <!-- chart panel -->
+  <g transform="translate(700 36)">
+    <rect width="520" height="248" rx="16" fill="#ffffff" fill-opacity="0.06" stroke="#ffffff" stroke-opacity="0.15"/>
+    <g stroke="#ffffff" stroke-opacity="0.12">
+      <line x1="24" y1="62" x2="496" y2="62"/>
+      <line x1="24" y1="112" x2="496" y2="112"/>
+      <line x1="24" y1="162" x2="496" y2="162"/>
+      <line x1="24" y1="212" x2="496" y2="212"/>
+    </g>
+    <!-- rate of rise (dashed) -->
+    <path d="M110 70 C 170 96 250 140 330 150 S 440 176 490 184" fill="none" stroke="#ffe0b2" stroke-width="2.5" stroke-dasharray="7 6" stroke-opacity="0.8"/>
+    <!-- bean temperature -->
+    <path d="M24 44 C 44 150 62 206 96 208 C 190 196 300 130 380 96 C 430 76 462 68 496 64" fill="none" stroke="url(#line)" stroke-width="5" stroke-linecap="round"/>
+    <!-- events -->
+    <g fill="#ffffff" fill-opacity="0.9" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="14">
+      <circle cx="210" cy="172" r="6" fill="#ffb74d"/>
+      <text x="196" y="196">Dry end</text>
+      <circle cx="380" cy="96" r="6" fill="#ff8a65"/>
+      <text x="338" y="124">First crack</text>
+      <circle cx="496" cy="64" r="6" fill="#ff7043"/>
+      <text x="446" y="46">Drop</text>
+    </g>
+  </g>
+
+  <!-- title -->
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <text x="64" y="146" font-size="78" font-weight="800" fill="#ffffff">RoastBench</text>
+    <text x="68" y="200" font-size="28" fill="#f3d9c8">Roast profiles and green coffee stock</text>
+    <text x="68" y="248" font-size="20" fill="#d7b8a5">Java  ·  Spring Boot  ·  React  ·  PostgreSQL</text>
+  </g>
+</svg>

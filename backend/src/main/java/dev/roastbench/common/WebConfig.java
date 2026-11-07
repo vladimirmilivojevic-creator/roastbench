@@ -37,14 +37,12 @@ public class WebConfig implements WebMvcConfigurer {
         return new OpenAPI().info(new Info()
                 .title("RoastBench API")
                 .version("1.0")
-                .description("""
-                        Roast profile and green coffee inventory API.
-
-                        Import roast logs (CSV and Artisan .alog), calculate rate of rise, development time ratio and \
-                        roast loss, compare a batch with a reference profile, and manage green coffee lots with an \
-                        append-only stock ledger and low-stock alerts. Demo data is synthetic.""")
+                .description("API for roasts, profiles and green coffee stock. Import roast logs (CSV and Artisan "
+                        + ".alog), get rate of rise, development time ratio and roast loss, compare a roast with a "
+                        + "reference roast, and keep track of green coffee lots and stock. All demo data is made up.")
                 .contact(new Contact().name("Vladimir Milivojevic")
                         .url("https://github.com/vladimirmilivojevic-creator/roastbench"))
-                .license(new License().name("MIT").url("https://opensource.org/licenses/MIT")));
+                .license(new License().name("Portfolio License (all rights reserved)")
+                        .url("https://github.com/vladimirmilivojevic-creator/roastbench/blob/main/LICENSE")));
     }
 }

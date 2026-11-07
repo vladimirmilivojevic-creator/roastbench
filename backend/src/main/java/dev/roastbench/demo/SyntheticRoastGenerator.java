@@ -7,13 +7,8 @@ import java.util.Map;
 import java.util.Random;
 
 /**
- * Generates synthetic but physically plausible drum-roast curves for demo data and sample files.
- *
- * <p>These are <b>not</b> real roasts. Bean temperature follows
- * {@code BT(t) = floor + (charge - floor) * exp(-t / dipTau) + K * (1 - exp(-t / riseTau))}: the cold beans pull the
- * probe down right after charge, then the bean mass heats up along a decaying rate of rise. Environment
- * temperature is a smooth curve above bean temperature. Probe noise is small autocorrelated Gaussian noise with a
- * 0.1 degree resolution. The generator is deterministic for a given {@link Spec#seed()}.
+ * Makes fake but realistic roast curves for the example data. These are NOT real roasts.
+ * The same seed always gives the same curve.
  */
 public final class SyntheticRoastGenerator {
 

@@ -8,17 +8,10 @@ import java.util.Map;
 import java.util.OptionalDouble;
 
 /**
- * Computes roast metrics: phases, development time ratio (DTR), roast loss and turning point.
+ * The main calculation of the app. It takes one roast and calculates the total time, the turning point, the three
+ * phases, DTR and roast loss. All times are in seconds from charge.
  *
- * <p>Definitions used (all times in seconds since charge):
- * <ul>
- *   <li>total time = drop time (or the last sample when drop is not marked)</li>
- *   <li>drying = charge to dry end; Maillard = dry end to first crack start; development = first crack start to drop</li>
- *   <li>DTR = development time / total time x 100</li>
- *   <li>roast loss = (green weight - roasted weight) / green weight x 100</li>
- * </ul>
- * When dry end is not marked it is estimated as the first time the bean temperature reaches
- * {@value #ESTIMATED_DRY_END_TEMP} C after the turning point, and the phase is flagged {@code estimated}.
+ * <p>If "dry end" is not in the file, we guess it: the first time the beans reach 150 C.
  */
 public final class CurveAnalyzer {
 

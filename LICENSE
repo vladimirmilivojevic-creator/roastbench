@@ -1,21 +1,44 @@
-MIT License
+RoastBench Portfolio License
+Copyright (c) 2026 Vladimir Milivojevic. All rights reserved.
 
-Copyright (c) 2026 Vladimir Milivojevic
+This project is published so that people can look at it and judge the work of its author. It is NOT open source.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+1. WHAT YOU MAY DO
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+   You may read the source code and run the program on your own computer, for one purpose only: to look at this
+   project and judge the skills of its author (for example in a job application or a hiring process).
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+   GitHub's Terms of Service also allow you to view and fork this repository inside GitHub. A fork gives you no other
+   rights than the ones in this license.
+
+2. WHAT YOU MAY NOT DO
+
+   Without written permission from the author you may not:
+
+   a) copy, change, publish, share, sell or sublicense the code, the tests, the docs, the images or the sample data,
+      in whole or in part;
+   b) use the code, or parts of it, in any product, service or project, whether it is paid or free, and whether it is
+      for a company or for yourself;
+   c) run or host the program for other people, or use it for any business purpose;
+   d) remove or change this license or the copyright notice;
+   e) use the code, the docs or the images to train or improve machine learning models.
+
+3. OTHER RIGHTS
+
+   No other rights are given. All rights that are not clearly given here stay with the author. If you want to use the
+   project in another way, ask first: write to the author on https://github.com/vladimirmilivojevic-creator
+
+4. THIRD-PARTY LIBRARIES
+
+   The libraries this project uses (for example Spring Boot, React, MUI, ECharts) keep their own licenses. They are
+   listed in backend/pom.xml and frontend/package.json. This license covers only the code and files written by the
+   author.
+
+5. NO WARRANTY
+
+   THE PROJECT IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND. THE AUTHOR IS NOT LIABLE FOR ANY DAMAGE THAT COMES
+   FROM USING IT.
+
+6. END OF PERMISSION
+
+   If you break these terms, your permission to use the project ends immediately.

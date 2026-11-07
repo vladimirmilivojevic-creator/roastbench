@@ -2,7 +2,7 @@ package dev.roastbench.analysis;
 
 import java.util.OptionalDouble;
 
-/** Small numeric helpers for sampled curves. */
+/** Small math helpers for curves, for example: find the value between two samples. */
 final class CurveMath {
 
     private CurveMath() {

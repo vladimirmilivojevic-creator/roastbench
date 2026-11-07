@@ -1,6 +1,6 @@
 package dev.roastbench.inventory;
 
-/** Why green coffee entered or left stock. The sign of the quantity is fixed by the type (except ADJUSTMENT). */
+/** Why coffee came in or went out of stock. */
 public enum MovementType {
     RECEIPT("Received"),
     ROAST_CONSUMPTION("Used in roast"),

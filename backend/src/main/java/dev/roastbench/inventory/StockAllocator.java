@@ -6,10 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Decides which locations a roast takes green coffee from: largest stock first, so a roast usually empties one
- * location before touching the next.
- */
+/** Decides where a roast takes its coffee from: first from the place that has the most stock. */
 final class StockAllocator {
 
     private StockAllocator() {

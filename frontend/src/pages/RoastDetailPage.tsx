@@ -299,11 +299,10 @@ export default function RoastDetailPage() {
             </Typography>
             {!reference ? (
               <Alert severity="info">
-                This profile has no reference roast yet. Open the roast you consider ideal and press &ldquo;Set as
-                reference&rdquo;.
+                This profile has no reference roast yet. Open your best roast and press &ldquo;Set as reference&rdquo;.
               </Alert>
             ) : reference.id === id ? (
-              <Alert severity="info">This roast is the reference. Other roasts of the profile are compared with it.</Alert>
+              <Alert severity="info">This roast is the reference. The other roasts of this profile are compared with it.</Alert>
             ) : comparison.isPending ? (
               <Loading />
             ) : comparison.isError ? (
@@ -312,12 +311,12 @@ export default function RoastDetailPage() {
               <>
                 <Typography color="text.secondary" sx={{ mb: 2 }}>
                   Reference: <Link to={`/roasts/${reference.id}`}>{reference.batchCode}</Link> {reference.name}. Both
-                  curves are aligned at charge and compared over the first {formatDuration(cmp.overlapSeconds)}.
+                  roasts start at charge. We compare the first {formatDuration(cmp.overlapSeconds)}.
                 </Typography>
                 <CardGrid min={150}>
-                  <MetricCard label="RMSE" value={formatTemp(cmp.rmse)} hint="root mean square difference" testId="cmp-rmse" />
-                  <MetricCard label="Mean difference" value={signed(cmp.meanSignedDeviation, 1, ' °C')} hint="+ is hotter than reference" />
-                  <MetricCard label="Largest difference" value={formatTemp(cmp.maxAbsDeviation)} hint={`at ${formatDuration(cmp.maxDeviationAtSeconds)}`} />
+                  <MetricCard label="Average gap" value={formatTemp(cmp.rmse)} hint="typical temperature difference" testId="cmp-rmse" />
+                  <MetricCard label="Hotter or colder" value={signed(cmp.meanSignedDeviation, 1, ' °C')} hint="+ means hotter than the reference" />
+                  <MetricCard label="Biggest gap" value={formatTemp(cmp.maxAbsDeviation)} hint={`at ${formatDuration(cmp.maxDeviationAtSeconds)}`} />
                   <MetricCard label="Dry end" value={formatSignedDuration(cmp.dryEndDeltaSeconds)} hint="vs reference" />
                   <MetricCard label="First crack" value={formatSignedDuration(cmp.firstCrackDeltaSeconds)} hint="vs reference" />
                   <MetricCard label="Total time" value={formatSignedDuration(cmp.dropDeltaSeconds)} hint={`drop ${signed(cmp.dropBeanTempDelta, 1, ' °C')}`} />

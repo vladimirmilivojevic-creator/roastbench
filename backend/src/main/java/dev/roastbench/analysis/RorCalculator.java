@@ -1,12 +1,11 @@
 package dev.roastbench.analysis;
 
 /**
- * Rate of rise (RoR) in degrees Celsius per minute.
+ * Rate of rise (RoR) = how fast the bean temperature goes up, in C per minute.
  *
- * <p>For every sample the RoR is the slope of an ordinary least-squares line fitted to all bean-temperature samples
- * inside a window centred on that sample. A regression slope is far less noisy than a plain
- * {@code (T2 - T1) / (t2 - t1)} difference, which matters because probes are read at 1-3 s intervals and have
- * 0.1-0.5 degree resolution. At the start and end of the curve the window is truncated to the available samples.
+ * <p>For each sample we take all samples in a 30 second window around it and draw the best straight line through
+ * them. The slope of that line is the RoR. This is smoother than using only two samples. At the start and the end of
+ * the roast the window is smaller.
  */
 public final class RorCalculator {
 

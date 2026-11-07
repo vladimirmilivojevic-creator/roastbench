@@ -126,7 +126,7 @@ export default function ComparePage() {
     <>
       <PageHeader
         title="Compare roasts"
-        subtitle={`${items!.length} roasts on one chart, aligned at charge`}
+        subtitle={`${items!.length} roasts on one chart. All of them start at charge.`}
         actions={<Button component={Link} to="/roasts">Back to roasts</Button>}
       />
 
@@ -148,7 +148,7 @@ export default function ComparePage() {
           </Select>
         </FormControl>
         <Typography variant="body2" color="text.secondary">
-          Choose a reference to see differences in the table and over time.
+          Pick a reference roast to see how the others differ from it.
         </Typography>
       </Stack>
 

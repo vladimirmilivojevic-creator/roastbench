@@ -65,7 +65,7 @@ export default function RoastChartPanel({ series, rorWindow, onRorWindowChange, 
         </Stack>
         <EChart option={option} height={height} label={label} testId="roast-chart" />
         <Typography variant="caption" color="text.secondary">
-          Scroll to zoom, drag the slider to pan. Dotted event lines (~) are estimated, not marked in the log.
+          Scroll to zoom. Drag the bar below to move. A dotted line (~) is a guess, it was not marked in the file.
         </Typography>
       </CardContent>
     </Card>

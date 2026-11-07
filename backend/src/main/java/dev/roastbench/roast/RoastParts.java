@@ -17,7 +17,7 @@ import java.util.Objects;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
-/** The satellite tables of a roast: curve samples, marked events and green coffee lots used. */
+/** The small tables that belong to a roast: curve samples, events and the lots that were used. */
 public final class RoastParts {
 
     private RoastParts() {

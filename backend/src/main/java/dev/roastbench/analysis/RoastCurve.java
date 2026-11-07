@@ -3,11 +3,8 @@ package dev.roastbench.analysis;
 import java.util.Arrays;
 
 /**
- * Immutable temperature curve of one roast.
- *
- * <p>Time is in seconds relative to CHARGE (t = 0), strictly increasing. Temperatures are in degrees Celsius.
- * The environment (drum/exhaust) temperature is optional. Accessors return copies, so fetch an array once
- * into a local variable when looping.
+ * One roast curve: time and temperatures. Time is in seconds from charge. Temperatures are in Celsius.
+ * The environment temperature (ET) is optional. The object cannot be changed after it is created.
  */
 public final class RoastCurve {
 

@@ -1,6 +1,6 @@
 package dev.roastbench.imports;
 
-/** Fills gaps (NaN) in the environment temperature channel so the curve can be validated and charted. */
+/** Fills missing environment temperatures, so the chart has no holes. */
 final class EnvironmentGaps {
 
     private EnvironmentGaps() {

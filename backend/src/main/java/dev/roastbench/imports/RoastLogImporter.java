@@ -15,8 +15,8 @@ import java.util.Map;
 import org.springframework.stereotype.Component;
 
 /**
- * Entry point for roast log uploads: picks the parser from the file name or content, then trims the cooling phase
- * (samples after drop), which is not part of the roast.
+ * The entry point for uploaded files. It chooses the right reader (CSV or .alog) and removes the cooling part that
+ * comes after drop.
  */
 @Component
 public class RoastLogImporter {

@@ -37,10 +37,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Green coffee inventory: lots, locations and the append-only stock ledger.
+ * Green coffee stock: lots, places (locations) and the stock list (ledger).
  *
- * <p>Stock is never stored: it is the sum of the ledger. Every posting locks the lot row first, so two concurrent
- * roasts cannot both spend the same kilograms.
+ * <p>Stock is never saved as a number. It is the sum of all lines in the ledger. Before every change we lock the lot,
+ * so two roasts at the same time cannot use the same coffee.
  */
 @Service
 public class InventoryService {

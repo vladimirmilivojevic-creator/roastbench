@@ -73,7 +73,7 @@ export default function ProfilesPage() {
     <>
       <PageHeader
         title="Profiles"
-        subtitle="A profile is a recipe: it groups the roasts of one coffee and points at the reference roast to aim for"
+        subtitle="A profile is a recipe for one coffee. Mark your best roast as the reference roast to aim for."
         actions={
           <Button variant="contained" startIcon={<AddIcon />} onClick={() => setEditing('new')}>
             New profile

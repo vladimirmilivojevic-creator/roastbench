@@ -47,7 +47,7 @@ export default function InventoryPage() {
     <>
       <PageHeader
         title="Green coffee"
-        subtitle="Lots, stock and low-stock alerts. Stock is the sum of the ledger: deliveries, corrections, moves and roasts."
+        subtitle="Your green coffee lots and how much is left. Every change (delivery, roast, correction) is saved as one line in a list."
         actions={
           <Button variant="contained" startIcon={<AddIcon />} onClick={() => setCreating(true)} data-testid="new-lot">
             New lot

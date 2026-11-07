@@ -1,6 +1,6 @@
 package dev.roastbench.analysis;
 
-/** Raised when roast data is structurally valid but physically or logically inconsistent. */
+/** Thrown when the roast data does not make sense (for example first crack before dry end). */
 public class AnalysisException extends RuntimeException {
 
     public AnalysisException(String message) {

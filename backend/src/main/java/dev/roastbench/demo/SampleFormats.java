@@ -10,7 +10,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.StringJoiner;
 
-/** Writes generated roasts in the two import formats: RoastBench CSV and an Artisan-style {@code .alog}. */
+/** Writes a generated roast as CSV, or as an Artisan style .alog file. */
 public final class SampleFormats {
 
     /** Preheat samples written before charge in the {@code .alog} sample, like a real Artisan recording. */

@@ -62,7 +62,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/** Roast use cases: import, query, edit, compare and delete (which puts the green coffee back into stock). */
+/** Everything about roasts: import, list, compare, edit and delete. Deleting a roast puts its coffee back in stock. */
 @Service
 public class RoastService {
 

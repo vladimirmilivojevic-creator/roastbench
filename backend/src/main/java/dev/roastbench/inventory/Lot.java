@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import java.time.Instant;
 
-/** A green coffee lot: one purchase of one coffee, with its origin details and minimum stock level. */
+/** A green coffee lot: one purchase of one coffee, with its origin and the minimum stock for the warning. */
 @Entity
 @Table(name = "lot")
 public class Lot {

@@ -6,11 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Minimal, safe parser for Python literals as written by Artisan ({@code .alog} files are a Python dict repr:
- * single-quoted strings, {@code True/False/None}). Also accepts plain JSON ({@code true/false/null}).
- *
- * <p>It never evaluates anything: it only builds {@code Map}, {@code List}, {@code String}, {@code Long},
- * {@code Double}, {@code Boolean} and {@code null}, and limits nesting depth.
+ * Reads the text of an Artisan .alog file. These files look like a Python dictionary (single quotes, True, None).
+ * This reader only builds data (maps, lists, text, numbers). It never runs any code, so a bad file cannot do harm.
+ * It also stops if the data is nested too deep.
  */
 final class PythonLiteralParser {
 

@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import java.time.Instant;
 
-/** One row of the append-only stock ledger. Rows are never updated or deleted. */
+/** One line of the stock list. Lines are never changed or deleted. */
 @Entity
 @Table(name = "stock_movement")
 public class StockMovement {

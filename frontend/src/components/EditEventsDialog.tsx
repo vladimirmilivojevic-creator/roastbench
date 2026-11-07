@@ -72,8 +72,8 @@ export default function EditEventsDialog({ open, roastId, events, onClose }: Pro
       <DialogTitle>Edit events</DialogTitle>
       <DialogContent>
         <DialogContentText sx={{ mb: 2 }}>
-          Times are counted from charge (m:ss). Leave a field empty to remove the event. Phases, development time
-          ratio and the chart are recalculated.
+          Time is counted from charge, as m:ss. Leave a field empty to remove the event. The phases, DTR and chart
+          are calculated again.
         </DialogContentText>
         <Stack spacing={2}>
           {EDITABLE.map(({ type, label }) => (

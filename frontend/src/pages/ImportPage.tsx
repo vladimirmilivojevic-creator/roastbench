@@ -152,8 +152,8 @@ export default function ImportPage() {
           <CloudUploadIcon color="primary" sx={{ fontSize: 44 }} />
           <Typography variant="h6">{file ? file.name : 'Drop a roast log here'}</Typography>
           <Typography color="text.secondary" sx={{ mb: 2 }}>
-            Artisan .alog files and CSV with time, bean temperature and optional environment temperature and events.
-            Sample files are in the <code>samples/</code> folder of the repository.
+            Use an Artisan .alog file, or a CSV file with time and bean temperature. Example files are in the{' '}
+            <code>samples</code> folder of the project.
           </Typography>
           <Button variant="contained" component="label" disabled={preview.isPending}>
             {preview.isPending ? 'Reading…' : file ? 'Choose another file' : 'Choose file'}
@@ -245,8 +245,8 @@ export default function ImportPage() {
                 Green coffee used
               </Typography>
               <Typography color="text.secondary" sx={{ mb: 2 }}>
-                Link the lots this roast used. The weights are deducted from stock when you import; add several lots
-                for a blend. Skip it to import the curve only.
+                Pick the coffee lots this roast used. The weight is taken out of your stock when you import. Add more
+                than one lot for a blend. Skip this to import only the curve.
               </Typography>
               <Stack spacing={2}>
                 {rows.map((row) => {

@@ -1,5 +1,5 @@
 # Render blueprint for the API (free plan). Create it with: Render dashboard > New > Blueprint > pick this repository.
-# The database is not on Render (its free PostgreSQL expires after 30 days): use Neon, see docs/deployment.md.
+# The database is not on Render (its free PostgreSQL ends after 30 days). It is on Neon.
 services:
   - type: web
     name: roastbench-api
@@ -7,7 +7,8 @@ services:
     plan: free
     dockerfilePath: ./backend/Dockerfile
     dockerContext: ./backend
-    healthCheckPath: /actuator/health
+    # "liveness" does not touch the database, so Render's checks do not keep the Neon database awake all day.
+    healthCheckPath: /actuator/health/liveness
     autoDeploy: true
     envVars:
       # JDBC URL of the Neon database, e.g. jdbc:postgresql://<host>/<db>?sslmode=require

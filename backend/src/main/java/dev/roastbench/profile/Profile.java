@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.time.Instant;
 
-/** A roast profile: a named recipe that groups roasts and points at the roast used as reference curve. */
+/** A profile is a recipe for one coffee. It points to the reference roast (the best one). */
 @Entity
 @Table(name = "profile")
 public class Profile {

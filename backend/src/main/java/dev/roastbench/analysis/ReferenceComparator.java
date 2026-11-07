@@ -4,7 +4,7 @@ import dev.roastbench.analysis.ComparisonResult.PhaseDelta;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Compares one roast against a reference roast, aligned at charge. */
+/** Compares one roast with a reference roast. Both roasts start at charge. */
 public final class ReferenceComparator {
 
     private ReferenceComparator() {

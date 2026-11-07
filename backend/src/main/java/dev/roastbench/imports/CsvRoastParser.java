@@ -21,17 +21,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Reads roast logs from CSV text. The format is deliberately tolerant; it is documented in
- * {@code docs/import-formats.md}.
- *
- * <ul>
- *   <li>delimiter: tab, semicolon or comma (detected on the header row); decimal comma allowed with tab/semicolon</li>
- *   <li>header row with a time column and a bean temperature column; optional environment temperature and event
- *       columns; temperature unit hints such as {@code BT (F)}</li>
- *   <li>time as seconds, {@code mm:ss} or {@code hh:mm:ss}</li>
- *   <li>optional metadata above the header as {@code # key: value} lines, or an Artisan-style first row such as
- *       {@code Date:25.04.2020<TAB>Unit:C<TAB>CHARGE:00:35<TAB>DROP:11:35}</li>
- * </ul>
+ * Reads CSV roast files. It accepts many styles: the separator can be comma, semicolon or tab, time can be seconds
+ * or m:ss, and temperatures can be in C or F. See docs/import-formats.md.
  */
 public final class CsvRoastParser {
 

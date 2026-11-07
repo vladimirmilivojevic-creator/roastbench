@@ -7,7 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-/** A place where green coffee is stored (warehouse, roastery shelf). */
+/** A place where green coffee is stored, for example "Main warehouse". */
 @Entity
 @Table(name = "location")
 public class Location {

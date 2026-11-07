@@ -2,7 +2,7 @@ package dev.roastbench.imports;
 
 import java.util.List;
 
-/** The uploaded roast log could not be read. Carries line-level details for the API error response. */
+/** The uploaded file cannot be read. It carries a list of details (for example line numbers) for the user. */
 public class ImportException extends RuntimeException {
 
     private final List<String> details;

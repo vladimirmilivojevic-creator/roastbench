@@ -38,11 +38,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * Fills the database with a small synthetic roastery: lots, stock movements, profiles and about twenty roasts.
- * Everything goes through the same services the API uses, so the demo data obeys the same rules as real data.
- * All curves are generated; none of it comes from a real roaster.
- */
+/** Fills the database with example data: lots, stock, profiles and about 20 roasts. It all uses the normal services. */
 @Service
 public class DemoDataService {
 

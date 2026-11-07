@@ -16,8 +16,8 @@ import java.math.BigDecimal;
 import java.time.Instant;
 
 /**
- * One roasted batch. The curve, events and lots live in their own tables; the summary metrics are stored here so
- * lists can be sorted and filtered without reading curves.
+ * One roast. The curve, events and lots are in other tables. The main numbers (time, DTR, loss) are saved here too,
+ * so the list can sort and filter fast.
  */
 @Entity
 @Table(name = "roast")

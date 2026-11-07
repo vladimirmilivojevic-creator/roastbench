@@ -169,7 +169,7 @@ export default function LotDetailPage() {
               Stock ledger
             </Typography>
             <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
-              Every change is a new row; nothing is edited or deleted. Newest booking first, with the balance after it.
+              Every change is a new line. Nothing is edited or deleted. Newest first. Balance = what was left after that line.
             </Typography>
             {movements.isPending ? (
               <Loading />

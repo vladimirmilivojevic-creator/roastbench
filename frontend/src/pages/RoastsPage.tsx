@@ -96,7 +96,7 @@ export default function RoastsPage() {
     <>
       <PageHeader
         title="Roasts"
-        subtitle="Every batch with its development time ratio, roast loss and green coffee"
+        subtitle="All your roasts. Click one to open it. Tick 2 to 10 roasts to compare them."
         actions={
           <>
             <Tooltip title={selected.length < 2 ? `Select 2 to ${MAX_COMPARE} roasts to compare` : ''}>
